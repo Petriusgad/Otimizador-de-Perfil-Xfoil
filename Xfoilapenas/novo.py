@@ -2,7 +2,7 @@ import subprocess
 import os
 import random
 
-airfoil_name = "a44975"
+airfoil_name = "NACA2412" #nome do arquivo ".dat" para o xfoil ler ou o próprio NACA
 gap = 0.01
 distance = random.uniform(0,1)
 raio = random.uniform(0.25,3) #raio é uma proporção entre o antigo perfil e o novo
@@ -16,7 +16,7 @@ codigo = random.randint(00000,99999) #criar arquivos dat com nomes diferentes
 if os.path.exists("polar_file.txt"):
     os.remove("polar_file.txt")
 
-input_file = open("input_file.in", 'w')
+input_file = open("input_file.in", 'w') #cria um arquivo e escreve os comandos dentro do xfoil
 input_file.write("\nPLOP\nG\n\n")
 if "NACA" in airfoil_name:
     input_file.write("{0}\n".format(airfoil_name))
@@ -49,13 +49,15 @@ input_file.write("\n\n")
 input_file.write("QUIT\n")
 input_file.close()
 
-
+#tudo que foi feito no arquivo que simula o xfoil vai ser levado pro próprio xfoil
 subprocess.call("xfoil.exe < input_file.in", shell = True)
+#só para ver quais foram os valores dos parâmetros
+print("raio:{0}".format(raio)) 
 print("raio:{0}".format(raio))
-print(local)
-print(gap)
-print(distance)
-print(thick)
-print(camber)
-print(max_thick)
-print(max_camber)
+print("local:{0}".format(local))
+print("gap:{0}".format(gap))
+print("distance:{0}".format(distance))
+print("thick:{0}".format(thick))
+print("camber:{0}".format(camber))
+print("max_thick:{0}".format(max_thick))
+print("max_camber: {0}".format(max_camber))
